@@ -13,8 +13,10 @@
 (define lista-grafo (list "a" "b" "c"))
 
 ;;para testes de centralidade
-(define lista-centralidaes (list '(a 2) '(b 5) '(c 1)))
 (define graph-of-test (unweighted-graph/undirected '((a b) (c d))))
+
+;;para testes de keywords
+(define lista-centralidaes (list '(a 2) '(b 5) '(c 1)))
 
 (define e-suite
   (test-suite
@@ -51,6 +53,19 @@
         (string? (car (car (Centrality graph-of-test))))
         (number? (cdr (car (Centrality graph-of-test))))
         (check-true (test-centrality))))))
+
+(define keywords-suite
+  (test-suite
+    "Testando dados usados nos testes"
+    (check-true  (list? lista-centralidaes))
+    (check-true (pair? (car lista-centralidaes)))
+    (check-true (string? (car (car lista-centralidaes))))
+    (check-true (number? (cdr (car lista-centralidaes))))
+    (test-case
+      "Testa Keywords, que recebe a lista de nós-centralidade e ordena as maiores"
+      (define (test-keywords)
+        (list? (Keywords lista-centralidaes))
+        (check-true (test-keywords))))))
 
 
 (run-tests centrality-suite)
