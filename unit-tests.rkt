@@ -1,13 +1,20 @@
 #lang racket
 
+(require graph)
 (require rackunit "funcwords.rkt")
 
 (require rackunit/text-ui)
 
+;;Para testes de entrada
 (define lista-entrada (list "Cahorrinhos" "são" "fofinhos"))
 (define lista-entrada1 (list "Bom" "dia" "jovens"))
 
+;;Para testes de grafo
 (define lista-grafo (list "a" "b" "c"))
+
+;;para testes de centralidade
+(define lista-centralidaes (list '(a 2) '(b 5) '(c 1)))
+(define graph-of-test (unweighted-graph/undirected '((a b) (c d))))
 
 (define e-suite
   (test-suite
@@ -21,6 +28,7 @@
         (not equal? (GetFile "teste.txt") lista-entrada1))
       (check-true (test-getFile)))))
 
+
 (define graph-suite
   (test-suite
     "Testando dados usados nos testes"
@@ -30,8 +38,19 @@
       "Testa BuildG, que recebe uma lista de palavras e retorna um grafo"
       (define (test-BuildG)
         (graph? (BuildG lista-grafo))
-        ;;(not equal? (GetFile "teste.txt") lista-entrada1))
-      (check-true (test-getFile)))))
+        (check-true (test-BuildG))))))
+
+(define centrality-suite
+  (test-suite
+    "Testando dados usados nos testes"
+    (check-true  (graph? graph-of-test))
+    (test-case
+      "Testa Centrality, que recebe um grafo e retorna uma lista de pares de nós e valor da centralidade"
+      (define (test-centrality)
+        (pair? (car (Centrality graph-of-test)))
+        (string? (car (car (Centrality graph-of-test))))
+        (number? (cdr (car (Centrality graph-of-test))))
+        (check-true (test-centrality))))))
 
 
-(run-tests e-suite)
+(run-tests centrality-suite)
