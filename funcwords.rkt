@@ -14,7 +14,4 @@
   (define all-vertices (get-vertices nOGraph))
   (define g-size (length all-vertices))
   (define centrality-list '())
-  (define (create-pair v)
-    (cons centrality-list (cons v (length (get-neighbors nOGraph v)))))
-  (map (lambda (x) (create-pair x)) all-vertices)
-  centrality-list)
+  (map (lambda (x) (cons centrality-list (cons x (length (get-neighbors nOGraph x))))) all-vertices))
