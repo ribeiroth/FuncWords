@@ -20,8 +20,9 @@
   centrality-list)
 
 (define (Keywords ctlList)
-  (sort  ctlList
-        (lambda (x y) (> (cdr x) (cdr y)))))
+  (Get-Keywords
+   (sort  ctlList(lambda (x y) (> (cdr x) (cdr y))))
+    0.1))
 
 ;;Funções auxiliares
 (define (calc-Centrality nOGraph g-size all-vertices)
@@ -33,4 +34,7 @@
   (let aux ([o-list cList] [rest-list null] [n 0])
     (if (= n f)
         (cons o-list rest-list )
-        (aux (drop o-list (floor part)) (cons (take o-list (floor part)) rest-list) (add1 n))))) 
+        (aux (drop o-list (floor part)) (cons (take o-list (floor part)) rest-list) (add1 n)))))
+
+(define (Get-Keywords list-keys percent)
+  (map (lambda (x) (car x)) (take list-keys (exact-ceiling (* percent (length list-keys))))))
