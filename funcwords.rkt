@@ -16,7 +16,7 @@
   (define g-size (length all-vertices))
   (define j (Partition all-vertices))
   (define future-list (map (lambda (x) (future (lambda () (calc-Centrality nOGraph g-size x)))) j))
-  (define centrality-list (map (lambda (x) (touch x)) future-list))
+  (define centrality-list (append-map (lambda (x) (touch x)) future-list))
   centrality-list)
 
 (define (Keywords ctlList)
