@@ -6,12 +6,19 @@
 (provide GetFile)
 (provide BuildG)
 (provide Centrality)
+(provide Keywords)
 
-(define (GetFile file) #t)
+;;Substituir pela função do Bruno
+(define (BuildG words-list)
+  (define g (unweighted-graph/directed '()))
+  (let aux ([n (car words-list)] [r-list (cdr words-list)])
+    (if (null? r-list)
+        g
+       (and (add-edge! g n (car r-list)) (aux (car r-list) (cdr r-list))))))
+  ;;----------------
 
-(define (BuildG l-palavras) #t)
-
-(define (Centrality nOGraph)
+(define (Centrality words-list)
+  (define nOGraph (BuildG words-list))
   (define all-vertices (get-vertices nOGraph))
   (define g-size (length all-vertices))
   (define j (Partition all-vertices))
@@ -25,6 +32,8 @@
     0.1))
 
 ;;Funções auxiliares
+(define (GetFile file) #t)
+
 (define (calc-Centrality nOGraph g-size all-vertices)
   (map (lambda (x) (cons x (/ (length (get-neighbors nOGraph x)) (- g-size 1)))) all-vertices))
 
