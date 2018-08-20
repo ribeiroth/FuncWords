@@ -3,7 +3,6 @@
 (require graph)
 (require future-visualizer)
 
-(provide GetFile)
 (provide BuildG)
 (provide Centrality)
 (provide Keywords)
@@ -26,14 +25,12 @@
   (define centrality-list (append-map (lambda (x) (touch x)) future-list))
   centrality-list)
 
-(define (Keywords ctlList)
+(define (Keywords ctlList percent)
   (Get-Keywords
    (sort  ctlList(lambda (x y) (> (cdr x) (cdr y))))
-    0.1))
+    percent))
 
 ;;Funções auxiliares
-(define (GetFile file) #t)
-
 (define (calc-Centrality nOGraph g-size all-vertices)
   (map (lambda (x) (cons x (/ (length (get-neighbors nOGraph x)) (- g-size 1)))) all-vertices))
 
