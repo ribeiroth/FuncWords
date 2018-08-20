@@ -6,6 +6,9 @@
 (provide BuildG)
 (provide Centrality)
 (provide Keywords)
+(provide Partition)
+
+(provide calc-Centrality)
 
 ;;Substituir pela função do Bruno
 (define (BuildG words-list)
@@ -36,6 +39,15 @@
 
 (define (Partition cList)
   (define f (processor-count))
+  (define part (/ (length cList) f))
+  (let aux ([o-list cList] [rest-list null] [n 1])
+    (if (= n f)
+        (cons o-list rest-list )
+        (aux (drop o-list (floor part)) (cons (take o-list (floor part)) rest-list) (add1 n)))))
+
+;;;PARTITION FOR TEST
+(define (Partition-fake cList)
+  (define f 1)
   (define part (/ (length cList) f))
   (let aux ([o-list cList] [rest-list null] [n 0])
     (if (= n f)
