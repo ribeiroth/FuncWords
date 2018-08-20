@@ -8,7 +8,7 @@ Como usar?
 
 2 - Execute o main.rkt via prompt, passando como parametro: 
 
-<nome do seu arquivo> <nome que deseja dar ao arquivo de saída> <porcentagem de palavras-chave que deseja obter>
+<nome do seu arquivo><nome que deseja dar ao arquivo de saída><porcentagem de palavras-chave que deseja obter>
   
 Por exemplo:
 
